@@ -13,7 +13,7 @@ module.exports = function(app) {
     var newNote = req.body;
     console.log(newNote);
     fs.readFile(filePath, "utf8", function(err, data) {
-      console.log("done1");
+      console.log("made it to post");
       if (err) throw err;
       var noteInfo = JSON.parse(data);
 
@@ -23,7 +23,7 @@ module.exports = function(app) {
 
       fs.writeFile(filePath, JSON.stringify(noteInfo), "utf8", function(err) {
         if (err) throw err;
-        console.log("done2");
+        console.log("made it to write");
       });
     });
     res.json(newNote);
@@ -41,7 +41,7 @@ module.exports = function(app) {
 
       fs.writeFile(filePath, JSON.stringify(noteDelete), "utf8", function(err) {
         if (err) throw err;
-        console.log("deletedone2");
+        console.log("made it to delete");
       });
     });
     res.send(emptyNote);
