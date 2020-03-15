@@ -10,12 +10,12 @@ module.exports = function(app) {
     });
   });
   app.post("/api/notes", function(req, res) {
-    var newNote = req.body;
+    let newNote = req.body;
     console.log(newNote);
     fs.readFile(filePath, "utf8", function(err, data) {
       console.log("made it to post");
       if (err) throw err;
-      var noteInfo = JSON.parse(data);
+      let noteInfo = JSON.parse(data);
 
       noteInfo.push(newNote);
       noteInfo.forEach((item, i) => (item.id = i + 1));
@@ -29,14 +29,14 @@ module.exports = function(app) {
     res.json(newNote);
   });
   app.delete("/api/notes/:id", function(req, res) {
-    var emptyNote = req.params.id;
+    let emptyNote = req.params.id;
     console.log(emptyNote);
 
     fs.readFile(filePath, "utf8", function(err, data) {
       if (err) throw err;
 
-      var noteDelete = JSON.parse(data);
-      var index = parseInt(emptyNote) - 1;
+      let noteDelete = JSON.parse(data);
+      let index = parseInt(emptyNote) - 1;
       noteDelete.splice(index, 1);
 
       fs.writeFile(filePath, JSON.stringify(noteDelete), "utf8", function(err) {
